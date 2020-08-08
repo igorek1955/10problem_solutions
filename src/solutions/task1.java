@@ -25,7 +25,7 @@ public class task1 {
                     (String.valueOf(people.get(i).birthDate.year));
             System.out.println(age[i]);
         }
-
+        System.out.println("hello world");
 
     }
 
