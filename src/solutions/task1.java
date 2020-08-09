@@ -12,10 +12,11 @@ public class task1 {
 
     public static void first() {
         // TODO: ПЕРВЫЙ ЭТАП создать 5 разных человек и вывести имя старшего
-        List<Person> people = new ArrayList<>();
-        for (int i = 1; i <= 10; i++) {
-            people.add(new Person(1991 + i, 1 + i, 1 + i, "Igor" + i, "Pupkin" + i));
-        }
+
+
+        Person person = new Person();
+        person.name.firstName = "igor";
+
 
         String s = "";//для хранения числа в виде строки
         int min = 0; //для хранения самого низкого числа
@@ -71,9 +72,6 @@ public class task1 {
 //            day = Integer.parseInt(s.substring(6,s.length()-1));
 //            people.add(new Person());
 //        }
-
-
-
     }
 }
 
