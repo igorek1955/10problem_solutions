@@ -51,46 +51,18 @@ public class task1 {
         String[] names = {"igor", "vasia", "kolya", "veronika", "marina", "marfa", "olga", "olesya", "kilka", "vobla"};
         for (int i = 0; i < 9; i++){
             randomAge = (int)(Math.random() * (max - min + 1) + min);
-            randomName = (int)(Math.random() * 10 + 1);
+            randomName = (int)(Math.random() * 10);
             String s = String.valueOf(randomAge);
             people.add(new Person(randomAge, names[randomName]));
         }
 
         people.forEach(s -> System.out.println(s.firstName + " " + s.age));
-
-    // рандомная дата рождения
-//        int year = 0;
-//        int month = 0;
-//        int day = 0;
-//        for (int i = 0; i < 9; i++){
-//            randomAge = (int)(Math.random() * (max - min + 1) + min);
-//            randomName = (int)(Math.random() * 10 + 1);
-//            String s = String.valueOf(randomAge);
-//            year = Integer.parseInt(s.substring(0,3));
-//            month = Integer.parseInt(s.substring(4,5));
-//            day = Integer.parseInt(s.substring(6,s.length()-1));
-//            people.add(new Person());
-//        }
-
-
-
     }
 }
 
-class Name {
-    public String firstName;
-    public String lastName;
-}
 
-class BirthDate {
-    int year;
-    int month;
-    int day;
-}
 
 class Person {
-    Name name;
-    BirthDate birthDate;
     int year;
     int month;
     int day;
@@ -110,17 +82,4 @@ class Person {
         this.age = age;
         this.firstName = first;
     }
-
-//    public Person(int year, int month, int day, String first, String last){
-//        BirthDate birth = new BirthDate();
-//        this.birthDate.year = year;
-//        this.birthDate.month = month;
-//        this.birthDate.day = day;
-//        this.name.firstName = first;
-//        this.name.lastName = last;
-//    }
-//    public Person(String first){
-//        this.name.firstName = first;
-//    }
-
 }
