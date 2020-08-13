@@ -1,7 +1,6 @@
 package CSVwriter;
 
 
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -19,11 +18,12 @@ public class csvWriter {
         static String lineSeparator;
         static String filePath;
         static String dateStyle;
-        static List<Customer> customers = new ArrayList<>();
+        static List<CSVwriter.Customer> customers = new ArrayList<>();
         static List<List<String>> rows = new ArrayList<List<String>>();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
 
 
         System.out.println("Укажите разделитель полей: ");
@@ -67,29 +67,29 @@ public class csvWriter {
             String s = reader.readLine();
             if(s != null && s.contains("exit")) break;
             String[] c = s.split(",");
-            Status.stat status;
+            CSVwriter.Status.stat status;
             if(c.length == 4) {
                 status = switch (c[3]) {
-                    case "common" -> Status.stat.COMMON;
-                    case "premium" -> Status.stat.PREMIUM;
-                    case "paused" -> Status.stat.COLLABORATION_PAUSED;
-                    case "canceled" -> Status.stat.COLLABORATION_CANCELED;
-                    default -> Status.stat.TEST;
+                    case "common" -> CSVwriter.Status.stat.COMMON;
+                    case "premium" -> CSVwriter.Status.stat.PREMIUM;
+                    case "paused" -> CSVwriter.Status.stat.COLLABORATION_PAUSED;
+                    case "canceled" -> CSVwriter.Status.stat.COLLABORATION_CANCELED;
+                    default -> CSVwriter.Status.stat.TEST;
                 };
             } else{
                 status = switch (c[2]) {
-                    case "common" -> Status.stat.COMMON;
-                    case "premium" -> Status.stat.PREMIUM;
-                    case "paused" -> Status.stat.COLLABORATION_PAUSED;
-                    case "canceled" -> Status.stat.COLLABORATION_CANCELED;
-                    default -> Status.stat.TEST;
+                    case "common" -> CSVwriter.Status.stat.COMMON;
+                    case "premium" -> CSVwriter.Status.stat.PREMIUM;
+                    case "paused" -> CSVwriter.Status.stat.COLLABORATION_PAUSED;
+                    case "canceled" -> CSVwriter.Status.stat.COLLABORATION_CANCELED;
+                    default -> CSVwriter.Status.stat.TEST;
                 };
             }
             try{
                 LocalDate birth = LocalDate.parse(c[2], formatter);
-                customers.add(new Customer(c[0], c[1], birth, status));
+                customers.add(new CSVwriter.Customer(c[0], c[1], birth, status));
             } catch (Exception e){
-                customers.add(new Customer(c[0], c[1], status));
+                customers.add(new CSVwriter.Customer(c[0], c[1], status));
             }
         }
         ListsGeneration.generatecsv(customers);
@@ -97,7 +97,7 @@ public class csvWriter {
 
 
     public static class ListsGeneration{
-        public static void generatecsv(List<Customer> customers) throws IOException {
+        public static void generatecsv(List<CSVwriter.Customer> customers) throws IOException {
             FileWriter csvWriter = new FileWriter("C:\\Users\\Igor\\Desktop\\FILE_NAME.txt");
             csvWriter.append("ID");
             csvWriter.append(paramSeparator);
@@ -108,7 +108,7 @@ public class csvWriter {
             csvWriter.append("Status");
             csvWriter.append('\n');
 
-            for(Customer c: customers){
+            for(CSVwriter.Customer c: customers){
                 if(c.getBirthDate()!=null){
                     String birthdate = String.valueOf(c.getBirthDate());
                     String stat = String.valueOf(c.getStatus());
