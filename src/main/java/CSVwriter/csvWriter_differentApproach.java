@@ -1,34 +1,38 @@
 package CSVwriter;
 
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import com.opencsv.CSVWriter;
+
+import java.awt.*;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 
 
-public class csvWriter {
+public class csvWriter_differentApproach {
     static String paramSeparator;
     static char lineSeparator;
     static String filePath;
     static String dateStyle;
     static List<Customer> customers = new ArrayList<>();
-    static List<List<String>> rows = new ArrayList<List<String>>();
+    static List<String> rows = new ArrayList<>();
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static DateTimeFormatter formatter;
 
-
     public static void main(String[] args) throws IOException {
-        checkInput();
-        fillCustomerList();
-        generateCSV(customers);
+//        checkInput();
+//        fillCustomerList();
+//        generateCSV(customers);
     }
+
+
 
     public static void checkInput() throws IOException {
         System.out.println("Укажите разделитель полей: ");
@@ -69,7 +73,7 @@ public class csvWriter {
             String s = reader.readLine();
             if (s != null && s.contains("exit")) break;
             String[] c = s.split(",");
-            CSVwriter.Status.stat status;
+            Status.stat status;
             if (c.length == 4) {
                 status = switch (c[3]) {
                     case "common" -> Status.stat.COMMON;
@@ -98,34 +102,32 @@ public class csvWriter {
 
 
     public static void generateCSV(List<Customer> customers) throws IOException {
-        try{
-            Files.createFile(Path.of(filePath));
-        } catch (Exception ignored){
-        }
-        FileWriter csvWriter = new FileWriter(filePath);
-        csvWriter.append("ID");
-        csvWriter.append(paramSeparator);
-        csvWriter.append("Fullname");
-        csvWriter.append(paramSeparator);
-        csvWriter.append("Birthdate");
-        csvWriter.append(paramSeparator);
-        csvWriter.append("Status");
-        csvWriter.append(lineSeparator);
+        FileWriter csvWriter = new FileWriter("C:\\Users\\Igor\\Desktop\\test7.txt");
 
+        rows.add("ID" + paramSeparator + "Fullname"
+                + paramSeparator + "Birthdate"
+                + paramSeparator + "Status");
         for (Customer c : customers) {
             if (c.getBirthDate() != null) {
                 String birthdate = String.valueOf(c.getBirthDate());
                 String stat = String.valueOf(c.getStatus());
-                rows.add(Arrays.asList(c.getCustomerId(), c.getFullName(), birthdate, stat));
+                rows.add(c.getCustomerId()
+                        + paramSeparator + c.getFullName()
+                        + paramSeparator + birthdate
+                        + paramSeparator + stat
+                        + lineSeparator);
             } else {
                 String stat = String.valueOf(c.getStatus());
-                rows.add(Arrays.asList(c.getCustomerId(), c.getFullName(), " ", stat));
+                rows.add(c.getCustomerId()
+                        + paramSeparator + c.getFullName()
+                        + paramSeparator + " "
+                        + paramSeparator + stat
+                        + lineSeparator);
             }
         }
 
-        for (List<String> rowData : rows) {
-            csvWriter.append(String.join(paramSeparator, rowData));
-            csvWriter.append(lineSeparator);
+        for(String row: rows){
+            csvWriter.append(row);
         }
 
         csvWriter.flush();

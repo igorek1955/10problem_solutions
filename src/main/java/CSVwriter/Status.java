@@ -1,7 +1,7 @@
 package CSVwriter;
 
 public interface Status {
-    public static enum stat{
+    enum stat{
         TEST,
         COMMON,
         PREMIUM,
