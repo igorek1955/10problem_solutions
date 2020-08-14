@@ -11,7 +11,6 @@ public class task1 {
     }
 
     public static void first() {
-        // TODO: ПЕРВЫЙ ЭТАП создать 5 разных человек и вывести имя старшего
         List<Person> people = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             people.add(new Person(1991 + i, 1 + i, 1 + i, "Igor" + i, "Pupkin" + i));
@@ -42,7 +41,6 @@ public class task1 {
 
 
     public static void second() {
-        // TODO: ВТОРОЙ ЭТАП создать коллекцию имен и создавать людей в цикле, подставляя имена и возраст рандомно.
         int min = 5;
         int max = 100;
         int randomName = 0;
