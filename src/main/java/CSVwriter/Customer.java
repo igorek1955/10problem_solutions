@@ -3,27 +3,27 @@ package CSVwriter;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Customer implements Status {
+public class Customer {
     private String CustomerId;
     private String FullName;
     private LocalDate BirthDate;
-    private Status.stat status;
+    private status status;
 
-    public Customer(String customerId, String fullName, Status.stat status) {
+    public Customer(String customerId, String fullName, status status) {
         CustomerId = customerId;
         FullName = fullName;
         this.status = status;
     }
 
-    public Status.stat getStatus() {
+    public status getStatus() {
         return status;
     }
 
-    public void setStatus(Status.stat status) {
+    public void setStatus(status status) {
         this.status = status;
     }
 
-    public Customer(String customerId, String fullName, LocalDate birthDate, Status.stat status) {
+    public Customer(String customerId, String fullName, LocalDate birthDate, status status) {
         CustomerId = customerId;
         FullName = fullName;
         BirthDate = birthDate;
