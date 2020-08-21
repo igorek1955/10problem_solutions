@@ -141,11 +141,17 @@ public class СsvWriter {
         csvWriter.append("Status");
         csvWriter.append(Configuration.lineSeparator);
 
+
         for (Customer c : customers) {
             if (c.getBirthDate() != null) {
                 String birthdate = String.valueOf(c.getBirthDate());
                 String stat = String.valueOf(c.getStatus());
-                rows.add(Arrays.asList(c.getCustomerId(), c.getFullName(), birthdate, stat));
+
+                //форматирование даты
+                DateTimeFormatter newFormat = DateTimeFormatter.ofPattern(Configuration.dateStyle);
+                String date = LocalDate.parse(birthdate, formatter).format(newFormat);
+
+                rows.add(Arrays.asList(c.getCustomerId(), c.getFullName(), date, stat));
             } else {
                 String stat = String.valueOf(c.getStatus());
                 rows.add(Arrays.asList(c.getCustomerId(), c.getFullName(), " ", stat));
