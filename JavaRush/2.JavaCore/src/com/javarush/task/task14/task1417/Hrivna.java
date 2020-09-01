@@ -1,0 +1,15 @@
+package com.javarush.task.task14.task1417;
+
+public class Hrivna extends Money {
+    public static final String currency = "UAH";
+    double amount;
+
+
+    public Hrivna(double amount) {
+        super(amount);
+    }
+
+    public String getCurrencyName(){
+        return currency;
+    }
+}
