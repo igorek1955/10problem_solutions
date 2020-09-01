@@ -1,2 +1,2 @@
 # 10problem_solutions
-java practioce
+java practice
