@@ -1,36 +1,22 @@
 package test;
 
 
+import java.util.stream.Stream;
+
 public class Threads {
     public static void main(String[] args) {
-        Thread t = new Thread(new SubThread4());
-        t.start();
-    }
-}
+        Stream.Builder<String> builder = Stream.builder();
 
-interface Message{
-    void showWarning();
-}
+        // Adding elements in the stream of Strings
+        Stream<String> stream = builder.add("Geeks").build();
 
-
-
-class SubThread4 implements Message, Runnable {
-
-    public void run(){
-        try{
-            while (!Thread.interrupted()){
-                System.out.println("running");
-                Thread.sleep(2000);
-                showWarning();
-            }
-        } catch (Exception e){
-            System.out.println("warning worked");
-        }
+        // Displaying the elements in the stream
+        stream.forEach(System.out::println);
     }
 
-    @Override
-    public void showWarning() {
-        Thread.currentThread().interrupt();
-    }
+//    public static int solution(int number) {
+//
+//    }
 }
+
 
